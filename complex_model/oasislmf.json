@@ -1,0 +1,9 @@
+{
+    "analysis_settings_json": "/var/oasis/analysis_settings.json",
+    "ktools_alloc_rule_gul": 0,
+    "ktools_legacy_gul_stream": true,
+    "lookup_data_dir": "/var/oasis/complex_model",
+    "lookup_module_path": "/var/oasis/complex_model",
+    "model_data_dir": "/var/oasis/model_data",
+    "model_version_csv": "/var/oasis/complex_model/ModelVersion.csv"
+}
