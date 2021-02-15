@@ -4,4 +4,4 @@
 Package initialiser.
 """
 
-from .DummyComplexModelKeysLookup import *
+from .MexicoQuakeKeysLookup import *

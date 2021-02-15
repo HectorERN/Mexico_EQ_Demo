@@ -16,6 +16,7 @@ RUN ln -s /usr/share/dotnet/dotnet /usr/bin/dotnet
 RUN dotnet --info
 RUN python3 --version
 RUN pip3 install --upgrade pip==20.0.2
+RUN rm /tmp/dotnet-sdk-3.1.301-linux-x64.tar.gz
 
 #ERN FILES
 #COPY ./ERN_Files_LAC.tar.gz /tmp/ERN_Files_LAC.tar.gz
@@ -24,16 +25,18 @@ RUN tar -zxf /tmp/ERN_Files_LAC.tar.gz -C /usr/local/bin/
 RUN rm /tmp/ERN_Files_LAC.tar.gz
 
 COPY ./requirements.txt /tmp/ 
-COPY ./oasislmf-1.9.0-py3-none-manylinux1_x86_64.whl /tmp/ 
+COPY ./oasislmf/oasislmf-1.9.0-py3-none-manylinux1_x86_64.whl /tmp/ 
 RUN pip3 uninstall -y oasislmf
 RUN pip3 install -r /tmp/requirements.txt
 RUN pip3 install /tmp/oasislmf-1.9.0-py3-none-manylinux1_x86_64.whl
 
-#COPY ./conf.ini ./
-COPY ./analysis_settings.json ./analysis_settings.json
-COPY ./analysis_settings.json /var/oasis/complex_model/analysis_settings.json
-COPY ./complex_model /var/oasis/complex_model
-COPY ./meta-data /var/oasis/meta-data
-COPY ./model_data /var/oasis/model_data
-COPY ./setup.py /var/oasis/
-RUN pip3 install -e /var/oasis/
+COPY ./src /home/worker/src
+COPY ./meta-data /home/worker/meta-data
+COPY ./oasislmf_deploy.json /home/worker/oasislmf.json
+COPY ./setup.py /home/worker/
+
+RUN pip3 install -e /home/worker/
+
+RUN sed -i 's/OASISLMF_CONFIG = \/var\/oasis\/oasislmf.json/OASISLMF_CONFIG = \/home\/worker\/oasislmf.json/g' conf.ini
+RUN sed -i 's/MODEL_SETTINGS_FILE = \/var\/oasis\/meta-data\/model_settings.json/MODEL_SETTINGS_FILE = \/home\/worker\/meta-data\/model_settings.json/g' conf.ini
+
