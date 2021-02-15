@@ -1,0 +1,7 @@
+README.md
+setup.py
+ERN_MexicoQuake.egg-info/PKG-INFO
+ERN_MexicoQuake.egg-info/SOURCES.txt
+ERN_MexicoQuake.egg-info/dependency_links.txt
+ERN_MexicoQuake.egg-info/entry_points.txt
+ERN_MexicoQuake.egg-info/top_level.txt

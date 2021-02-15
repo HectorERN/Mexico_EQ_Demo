@@ -1,0 +1,3 @@
+[console_scripts]
+ERN_MexicoQuake_gulcalc = src.model_execution_worker.ERN_MexicoQuake_gulcalc:main
+
