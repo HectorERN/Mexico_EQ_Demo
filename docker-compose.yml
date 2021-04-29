@@ -1,7 +1,7 @@
 version: '3'
 services:
   server:
-   image: coreoasis/api_server:1.9.0
+   image: coreoasis/api_server:1.15.6
    ports:
      - 8000:8000
    links:
@@ -31,7 +31,7 @@ services:
    volumes:
      - ${OASIS_MEDIA_ROOT:-./docker-shared-fs}:/shared-fs:rw
   worker-monitor:
-   image: coreoasis/api_server:1.9.0
+   image: coreoasis/api_server:1.15.6
    command: [wait-for-server, 'server:8000', celery, worker, -A, src.server.oasisapi, --loglevel=INFO]
    links:
      - server-db
@@ -57,7 +57,7 @@ services:
    volumes:
      - ${OASIS_MEDIA_ROOT:-./docker-shared-fs}:/shared-fs:rw
   worker:
-    image: coreoasis/custom_model_worker:1.9.0
+    image: coreoasis/custom_model_worker:1.15.6
     build:
       context: .
       dockerfile: Dockerfile.custom_model_worker
@@ -65,8 +65,8 @@ services:
      - celery-db
      - rabbit:myrabbit
     environment:
-     - OASIS_MODEL_SUPPLIER_ID=OasisLMF
-     - OASIS_MODEL_ID=ComplexModelExample
+     - OASIS_MODEL_SUPPLIER_ID=ERN
+     - OASIS_MODEL_ID=MexicoQuake
      - OASIS_MODEL_VERSION_ID=1
      - OASIS_RABBIT_HOST=rabbit
      - OASIS_RABBIT_PORT=5672

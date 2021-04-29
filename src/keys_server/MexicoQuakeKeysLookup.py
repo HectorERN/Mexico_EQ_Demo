@@ -29,7 +29,7 @@ class MexicoQuakeKeysLookup(OasisBaseKeysLookup):
 
         self._coverage_types = [
             coverages.COVERAGE_TYPES['buildings']['id']
-            #,coverages.COVERAGE_TYPES['contents']['id']
+            ,coverages.COVERAGE_TYPES['contents']['id']
         ]
 
 
